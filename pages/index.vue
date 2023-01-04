@@ -2,16 +2,16 @@
   <div>
     <v-text-field outlined label="Add your new task"></v-text-field>
 
-    <v-list>
+    <v-list v-for="(task, i) in tasks" :key="i">
       <v-list-item>
         <v-list-item-action>
           <v-checkbox></v-checkbox>
         </v-list-item-action>
         <v-list-item-content>
-          <v-list-item-content> First App </v-list-item-content>
+          <v-list-item-content> {{ task.title }} </v-list-item-content>
         </v-list-item-content>
         <v-list-item-content>
-          <v-list-item-content> Date </v-list-item-content>
+          <v-list-item-content> {{ task.date }} </v-list-item-content>
         </v-list-item-content>
         <v-list-item-action>
           <v-btn icon>
@@ -25,7 +25,12 @@
 </template>
 
 <script>
-export default {}
+import { mapGetters } from 'vuex'
+export default {
+  computed: {
+    ...mapGetters('task', { tasks: 'tasks' }),
+  },
+}
 </script>
 
 <style></style>

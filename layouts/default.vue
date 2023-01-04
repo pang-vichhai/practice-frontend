@@ -1,12 +1,6 @@
 <template>
   <v-app dark>
-    <v-navigation-drawer
-      v-model="drawer"
-      :mini-variant="miniVariant"
-      :clipped="clipped"
-      fixed
-      app
-    >
+    <v-navigation-drawer v-model="drawer" :clipped="clipped" fixed app>
       <v-list>
         <v-list-item>
           <v-list-item-title class="display-1">Vue Js</v-list-item-title>
@@ -46,14 +40,7 @@
           gradient="to top right, rgba(100,115,201,.7), rgba(25,32,72,.7)"
         ></v-img>
       </template>
-      <!-- <div class="d-flex">
-        <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-        <v-spacer></v-spacer>
-        <v-btn icon>
-          <v-icon>mdi-magnify</v-icon>
-        </v-btn>
-      </div>
-      <v-toolbar-title>{{ title }}</v-toolbar-title> -->
+
 
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title> {{ title }} </v-toolbar-title>
