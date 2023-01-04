@@ -87,8 +87,13 @@ export default {
       items: [
         {
           icon: 'mdi-apps',
-          title: 'Welcome',
+          title: 'Task',
           to: '/',
+        },
+        {
+          icon: 'mdi-information',
+          title: 'About',
+          to: '/about',
         },
       ],
       title: 'Todo List',
