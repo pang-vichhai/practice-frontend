@@ -1,15 +1,13 @@
 import getters from "./getters"
+import mutations from "./mutations"
 export const state = () => ({
-    tasks:[{
-        title:'First',
-        desc:'',
-        date:''
-    }]
+    tasks:[]
 })
 
 export default {
     namespaced: true,
     state,
-    getters
+    getters,
+    mutations
 
 }

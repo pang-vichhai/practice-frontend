@@ -1,25 +1,26 @@
 <template>
   <div>
-    <v-form>
+    <v-form @submit.prevent="addTask" ref="form">
       <v-text-field
         v-model="task"
         outlined
         label="Add your new task"
+        :rules="rules"
+        required
       ></v-text-field>
 
+      <div class="d-flex justify-end">
+        <v-btn type="submit" elevation="0" color="primary">Add New Task</v-btn>
+      </div>
     </v-form>
 
-    <div class="d-flex justify-end">
-      <v-btn @click="addTask" elevation="0" color="primary">Add New Task</v-btn>
-    </div>
-
-    <v-list v-for="(task, i) in tasks" :key="i">
+    <v-list v-for="(task,i) in tasks" :key="i">
       <v-list-item>
         <v-list-item-action>
           <v-checkbox></v-checkbox>
         </v-list-item-action>
         <v-list-item-content>
-          <v-list-item-content> {{ task.title }} </v-list-item-content>
+          <v-list-item-content> {{ task }} </v-list-item-content>
         </v-list-item-content>
         <v-list-item-action>
           <v-tooltip top>
@@ -53,13 +54,17 @@ export default {
   computed: {
     ...mapGetters('task', { tasks: 'tasks' }),
   },
-  date() {
+  data() {
     return {
       task: null,
+      rules: [(v) => !!v || ''],
     }
   },
   methods: {
-    addTask() {},
+    addTask() {
+      if (!this.$refs.form.validate()) return
+      this.$store.commit('task/setTask', this.task)
+    },
   },
 }
 </script>
