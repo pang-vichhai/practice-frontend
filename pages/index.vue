@@ -26,10 +26,10 @@
           <v-tooltip top>
             <template v-slot:activator="{ on, attrs }">
               <v-btn icon v-on="on" v-bind="attrs">
-                <v-icon color="primary">mdi-file-find</v-icon>
+                <v-icon color="primary">mdi-account-edit</v-icon>
               </v-btn>
             </template>
-            <span>Preview</span>
+            <span>Edit</span>
           </v-tooltip>
         </v-list-item-action>
         <v-list-item-action>
