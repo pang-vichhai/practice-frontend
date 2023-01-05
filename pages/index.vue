@@ -1,56 +1,32 @@
 <template>
   <div>
-    <v-form @submit.prevent="addTask" ref="form">
-      <v-text-field
-        v-model="task"
-        outlined
-        label="Add your new task"
-        :rules="rules"
-        required
-      ></v-text-field>
+    <v-card flat width="700" class="mx-auto">
+      <v-form @submit.prevent="addTask" ref="form">
+        <v-text-field
+          v-model="task"
+          outlined
+          label="Add your new task"
+          :rules="rules"
+          required
+        ></v-text-field>
 
-      <div class="d-flex justify-end">
-        <v-btn type="submit" elevation="0" color="primary">Add New Task</v-btn>
-      </div>
-    </v-form>
+        <div class="d-flex justify-end">
+          <v-btn type="submit" elevation="0" color="primary"
+            >Add New Task</v-btn
+          >
+        </div>
+      </v-form>
 
-    <v-list v-for="(task,i) in tasks" :key="i">
-      <v-list-item>
-        <v-list-item-action>
-          <v-checkbox></v-checkbox>
-        </v-list-item-action>
-        <v-list-item-content>
-          <v-list-item-content> {{ task }} </v-list-item-content>
-        </v-list-item-content>
-        <v-list-item-action>
-          <v-tooltip top>
-            <template v-slot:activator="{ on, attrs }">
-              <v-btn icon v-on="on" v-bind="attrs">
-                <v-icon color="primary">mdi-account-edit</v-icon>
-              </v-btn>
-            </template>
-            <span>Edit</span>
-          </v-tooltip>
-        </v-list-item-action>
-        <v-list-item-action>
-          <v-tooltip top>
-            <template v-slot:activator="{ on, attrs }">
-              <v-btn icon v-on="on" v-bind="attrs">
-                <v-icon color="red">mdi-delete</v-icon>
-              </v-btn>
-            </template>
-            <span>Delete</span>
-          </v-tooltip>
-        </v-list-item-action>
-      </v-list-item>
-      <v-divider></v-divider>
-    </v-list>
+      <task-list :task="task" v-for="(task,i) in tasks" :key="i"></task-list>
+    </v-card>
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
+import taskList from '~/components/taskList.vue'
 export default {
+  components: { taskList },
   computed: {
     ...mapGetters('task', { tasks: 'tasks' }),
   },
@@ -58,6 +34,7 @@ export default {
     return {
       task: null,
       rules: [(v) => !!v || ''],
+
     }
   },
   methods: {
@@ -65,6 +42,7 @@ export default {
       if (!this.$refs.form.validate()) return
       this.$store.commit('task/setTask', this.task)
     },
+
   },
 }
 </script>
