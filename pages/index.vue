@@ -17,7 +17,7 @@
         </div>
       </v-form>
 
-      <task-list :task="task" v-for="(task,i) in tasks" :key="i"></task-list>
+      <task-list :task="task" v-for="(task,i) in tasks" :id="i" :key="i"></task-list>
     </v-card>
   </div>
 </template>
