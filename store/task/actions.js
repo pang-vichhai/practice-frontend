@@ -1,5 +1,6 @@
 import axios from "axios";
 
+
 const baseURL = process.env.NUXT_ENV_API_URL
 export default{
     async apiGetAllTask({dispatch,commit}){
@@ -44,6 +45,16 @@ export default{
             // .then(
             //     commit('delete_task',payload.id)
             // )
+        })
+    },
+    async apiGetOneTask({dispatch,commit},payload){
+        return new Promise((resolve,reject)=>{
+            axios.get(`${baseURL}/todos/${payload}`)
+            .then(
+                (res)=>{
+                    const data = res.data
+                    commit('set_one_task',data)
+            })
         })
     }
 }

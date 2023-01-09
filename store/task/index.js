@@ -2,7 +2,8 @@ import getters from "./getters"
 import mutations from "./mutations"
 import actions from "./actions"
 export const state = () => ({
-    tasks:[]
+    tasks:[],
+    task:null
 })
 
 export default {

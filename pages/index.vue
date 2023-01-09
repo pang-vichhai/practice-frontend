@@ -51,11 +51,15 @@ export default {
       await this.$store.dispatch('task/apiGetAllTask')
     },
     addTask() {
+      const validate = this.$refs.form.validate()
+      if(!validate) return;
       this.$store.dispatch('task/apiCreateTask', this.task)
+      this.$refs.form.reset()
       this.getAllTask()
     },
     deleteTask(id) {
       this.$store.dispatch('task/apiDeleteTask', id)
+      this.$refs.form.reset()
       this.getAllTask()
     },
   },

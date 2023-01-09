@@ -22,7 +22,7 @@
         <v-list-item-action>
           <v-tooltip top>
             <template v-slot:activator="{ on, attr }">
-              <v-btn icon v-on="on" v-bind="attr">
+              <v-btn @click="goToEdit(task.id)" icon v-on="on" v-bind="attr">
                 <v-icon color="primary">mdi-account-edit</v-icon>
               </v-btn>
             </template>
@@ -57,6 +57,13 @@ export default {
     // },
     deleteTask(){
       this.$emit('deleteTask',this.task.id)
+    },
+    goToEdit(id){
+      this.$router.push(`task/${id}`)
+      this.getOneTask(id)
+    },
+    async getOneTask(id){
+      this.$store.dispatch('task/apiGetOneTask',id)
     }
   },
   data() {

@@ -8,5 +8,8 @@ export default {
     },
     set_all_task(state,payload){
         state.tasks = payload
+    },
+    set_one_task(state,payload){
+        state.task = payload
     }
 }
