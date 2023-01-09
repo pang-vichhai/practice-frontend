@@ -42,8 +42,14 @@ export default {
       if (!this.$refs.form.validate()) return
       this.$store.commit('task/setTask', this.task)
     },
+    getAllTask(){
+      this.$store.dispatch('task/apiGetAllTask')
+    }
 
   },
+  mounted(){
+    this.getAllTask()
+  }
 }
 </script>
 

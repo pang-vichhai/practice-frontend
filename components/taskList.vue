@@ -6,7 +6,7 @@
           <v-list-item-content
             :class="done ? 'text-decoration-line-through' : ''"
           >
-            {{ task }}
+            {{ task.content }}
           </v-list-item-content>
         </v-list-item-content>
         <v-list-item-action>
