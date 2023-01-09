@@ -30,9 +30,9 @@
           </v-tooltip>
         </v-list-item-action>
         <v-list-item-action>
-          <v-tooltip>
+          <v-tooltip top>
             <template v-slot:activator="{ on, attr }">
-              <v-btn @click="deleteTask(id)" icon v-on="on" v-bind="attr">
+              <v-btn @click="deleteTask" icon v-on="on" v-bind="attr">
                 <v-icon color="red">mdi-delete</v-icon>
               </v-btn>
             </template>
@@ -52,8 +52,11 @@ export default {
     toBeDone() {
       this.done = true
     },
-    deleteTask(id){
-        this.$store.commit('task/deleteTask',id)
+    // deleteTask(id){
+    //     this.$store.dispatch('task/apiDeleteTask',id)
+    // },
+    deleteTask(){
+      this.$emit('deleteTask',this.task.id)
     }
   },
   data() {

@@ -17,7 +17,13 @@
         </div>
       </v-form>
 
-      <task-list :task="task" v-for="(task,i) in tasks" :id="i" :key="i"></task-list>
+      <task-list
+        :task="task"
+        v-for="(task, i) in tasks"
+        :id="i"
+        :key="i"
+        @deleteTask="deleteTask"
+      ></task-list>
     </v-card>
   </div>
 </template>
@@ -34,22 +40,28 @@ export default {
     return {
       task: null,
       rules: [(v) => !!v || ''],
-
     }
   },
   methods: {
-    addTask() {
-      if (!this.$refs.form.validate()) return
-      this.$store.commit('task/setTask', this.task)
+    // addTask() {
+    //   if (!this.$refs.form.validate()) return
+    //   this.$store.commit('task/setTask', this.task)
+    // },
+    async getAllTask() {
+      await this.$store.dispatch('task/apiGetAllTask')
     },
-    getAllTask(){
-      this.$store.dispatch('task/apiGetAllTask')
-    }
-
+    addTask() {
+      this.$store.dispatch('task/apiCreateTask', this.task)
+      this.getAllTask()
+    },
+    deleteTask(id) {
+      this.$store.dispatch('task/apiDeleteTask', id)
+      this.getAllTask()
+    },
   },
-  mounted(){
+  mounted() {
     this.getAllTask()
-  }
+  },
 }
 </script>
 
