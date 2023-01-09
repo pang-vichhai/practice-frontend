@@ -6,7 +6,7 @@
         <v-btn color="red" elevation="0" @click="cancel" dark class="mx-2"
           >Cancel</v-btn
         >
-        <v-btn color="primary" elevation="0">Update</v-btn>
+        <v-btn color="primary" elevation="0" @click="update(task)">Update</v-btn>
       </div>
     </v-form>
   </v-container>
@@ -22,6 +22,9 @@ export default {
     cancel() {
       this.$router.push('/')
     },
+    update(tas){
+      this.$store.dispatch('task/apiUpdateTask',tas)
+    }
   },
 }
 </script>

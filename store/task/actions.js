@@ -1,6 +1,5 @@
 import axios from "axios";
 
-
 const baseURL = process.env.NUXT_ENV_API_URL
 export default{
     async apiGetAllTask({dispatch,commit}){
@@ -35,7 +34,7 @@ export default{
             })
         })
     },
-    apiDeleteTask({dispatch,commit},payload){
+    apiDeleteTask({dispatch},payload){
         return new Promise((resolve,reject)=>{
             axios
             .delete(`${baseURL}/todos/${payload}`)
@@ -47,14 +46,26 @@ export default{
             // )
         })
     },
-    async apiGetOneTask({dispatch,commit},payload){
-        return new Promise((resolve,reject)=>{
+    async apiGetOneTask({commit},payload){
+        return await new Promise((resolve,reject)=>{
             axios.get(`${baseURL}/todos/${payload}`)
             .then(
                 (res)=>{
                     const data = res.data
                     commit('set_one_task',data)
+                    if(!data){
+                        reject(new Error('API return failed'))
+                    }
+                    resolve(data)
             })
+        })
+    },
+    async apiUpdateTask({dispatch,commit},payload){
+        return await new Promise((resolve,reject)=>{
+            axios
+            .put(`${baseURL}/todos/${payload.id}`,{content : payload.content})
+            .then(res=>{resolve(res)})
+            .catch((err)=>{reject(err)})
         })
     }
 }
