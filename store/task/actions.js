@@ -34,10 +34,13 @@ export default{
             })
         })
     },
-    async apiDeleteTask({dispatch,commit},payload){
-        return await new Promise((resolve,reject)=>{
+    apiDeleteTask({dispatch,commit},payload){
+        return new Promise((resolve,reject)=>{
             axios
             .delete(`${baseURL}/todos/${payload}`)
+            .then(
+                dispatch('apiGetAllTask')
+            )
             // .then(
             //     commit('delete_task',payload.id)
             // )
