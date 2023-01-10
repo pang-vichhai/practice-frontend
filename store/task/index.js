@@ -3,7 +3,8 @@ import mutations from "./mutations"
 import actions from "./actions"
 export const state = () => ({
     tasks:[],
-    task:null
+    task:null,
+    update:null
 })
 
 export default {

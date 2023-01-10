@@ -11,5 +11,8 @@ export default {
     },
     set_one_task(state,payload){
         state.task = payload
+    },
+    set_update_task(state,payload){
+        state.update = payload
     }
 }

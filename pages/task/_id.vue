@@ -1,30 +1,62 @@
 <template>
-  <v-container>
-    <v-form>
-      <v-text-field v-model="task.content" outlined></v-text-field>
-      <div class="d-flex justify-end">
-        <v-btn color="red" elevation="0" @click="cancel" dark class="mx-2"
-          >Cancel</v-btn
-        >
-        <v-btn color="primary" elevation="0" @click="update(task)">Update</v-btn>
-      </div>
-    </v-form>
-  </v-container>
+  <div>
+    <v-container v-if="newEdit">
+      <v-form>
+        <v-text-field v-model="newEdit.content" outlined></v-text-field>
+        <div class="d-flex justify-end">
+          <v-btn color="red" elevation="0" @click="cancel" dark class="mx-2"
+            >Cancel</v-btn
+          >
+          <v-btn color="primary" elevation="0" @click="updateTask"
+            >Update</v-btn
+          >
+        </div>
+      </v-form>
+    </v-container>
+    <div v-else class="d-flex justify-center">
+      <v-btn to="/">Back Home</v-btn>
+    </div>
+  </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
 export default {
+  data() {
+    return {
+      // newEdit: task
+      newEdit: null,
+    }
+  },
   computed: {
     ...mapGetters('task', { task: 'task' }),
+    id() {
+      return this.$route.params.id
+    },
   },
   methods: {
     cancel() {
       this.$router.push('/')
     },
-    update(tas){
-      this.$store.dispatch('task/apiUpdateTask',tas)
-    }
+    async updateTask() {
+      await this.$store
+        .dispatch('task/apiUpdateTask', this.newEdit)
+        .then(this.$router.push('/'))
+    },
+    getOneTask() {
+      this.$store.dispatch('task/apiGetOneTask', this.id).then((res) => {
+         this.newEdit = res.data      
+      })
+    },
+  },
+  // fetch() {
+  //   this.$store.dispatch('task/apiGetOneTask',this.id).then((res) => {
+  //     this.newEdit = res.data
+  //     console.log(this.newEdit)
+  //   })
+  // },
+  mounted() {
+    this.getOneTask()
   },
 }
 </script>

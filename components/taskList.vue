@@ -60,11 +60,7 @@ export default {
     },
     goToEdit(id){
       this.$router.push(`task/${id}`)
-      this.getOneTask(id)
     },
-    async getOneTask(id){
-      this.$store.dispatch('task/apiGetOneTask',id)
-    }
   },
   data() {
     return {

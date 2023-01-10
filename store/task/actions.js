@@ -9,7 +9,6 @@ export default{
             .then(
                 (res)=>{
                     const obj = res.data
-                    console.log(obj)
                     if(!obj){
                         reject(new Error('Api connection is wrong'))
                     }
@@ -51,21 +50,22 @@ export default{
             axios.get(`${baseURL}/todos/${payload}`)
             .then(
                 (res)=>{
-                    const data = res.data
-                    commit('set_one_task',data)
-                    if(!data){
-                        reject(new Error('API return failed'))
-                    }
-                    resolve(data)
+                    resolve(res)
+                    
             })
         })
     },
-    async apiUpdateTask({dispatch,commit},payload){
-        return await new Promise((resolve,reject)=>{
+     apiUpdateTask({commit},payload){
+        return new Promise((resolve,reject)=>{
             axios
             .put(`${baseURL}/todos/${payload.id}`,{content : payload.content})
-            .then(res=>{resolve(res)})
-            .catch((err)=>{reject(err)})
+            .then(
+                (res)=>{ 
+                    resolve(res)
+                })
+            .catch(
+                (err)=>{reject(err)
+                })
         })
     }
 }
