@@ -1,13 +1,13 @@
 <template>
   <div>
     <v-container v-if="newEdit">
-      <v-form>
+      <v-form @submit.prevent="updateTask">
         <v-text-field v-model="newEdit.content" outlined></v-text-field>
         <div class="d-flex justify-end">
           <v-btn color="red" elevation="0" @click="cancel" dark class="mx-2"
             >Cancel</v-btn
           >
-          <v-btn color="primary" elevation="0" @click="updateTask"
+          <v-btn color="primary" elevation="0" type="submit"
             >Update</v-btn
           >
         </div>

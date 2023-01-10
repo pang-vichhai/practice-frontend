@@ -13,10 +13,10 @@
           <v-tooltip top>
             <template v-slot:activator="{ on, attr }">
               <v-btn @click="toBeDone" icon v-on="on" v-bind="attr">
-                <v-icon color="green">mdi-check-all</v-icon>
+                <v-icon :color="done ? 'red' : 'green'">mdi-check-all</v-icon>
               </v-btn>
             </template>
-            <span>Done</span>
+            <span>{{done?'Undone':'Done'}}</span>
           </v-tooltip>
         </v-list-item-action>
         <v-list-item-action>
@@ -47,18 +47,18 @@
 
 <script>
 export default {
-  props: ['task','id'],
+  props: ['task', 'id'],
   methods: {
     toBeDone() {
-      this.done = true
+      this.done = !this.done
     },
     // deleteTask(id){
     //     this.$store.dispatch('task/apiDeleteTask',id)
     // },
-    deleteTask(){
-      this.$emit('deleteTask',this.task.id)
+    deleteTask() {
+      this.$emit('deleteTask', this.task.id)
     },
-    goToEdit(id){
+    goToEdit(id) {
       this.$router.push(`task/${id}`)
     },
   },
