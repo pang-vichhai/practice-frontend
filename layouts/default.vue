@@ -3,7 +3,7 @@
     <v-navigation-drawer v-model="drawer" :clipped="clipped" fixed app>
       <v-list>
         <v-list-item>
-          <v-list-item-title class="display-1">Vue Js</v-list-item-title>
+          <v-list-item-title class="display-1">To Do List</v-list-item-title>
         </v-list-item>
       </v-list>
       <v-divider></v-divider>
