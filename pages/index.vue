@@ -47,8 +47,8 @@ export default {
     //   if (!this.$refs.form.validate()) return
     //   this.$store.commit('task/setTask', this.task)
     // },
-    async getAllTask() {
-      await this.$store.dispatch('task/apiGetAllTask')
+    getAllTask() {
+     this.$store.dispatch('task/apiGetAllTask')
     },
     addTask() {
       const validate = this.$refs.form.validate()
