@@ -5,7 +5,7 @@
         <v-text-field
           v-model="task"
           outlined
-          label="Add your new task"
+          label="Add your new task here!"
           :rules="rules"
           required
         ></v-text-field>
