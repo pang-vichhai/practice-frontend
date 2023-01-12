@@ -4,7 +4,6 @@ import actions from "./actions"
 export const state = () => ({
     tasks:[],
     task:null,
-    update:null
 })
 
 export default {

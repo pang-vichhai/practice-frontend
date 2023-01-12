@@ -49,12 +49,6 @@ export default {
       })
     },
   },
-  // fetch() {
-  //   this.$store.dispatch('task/apiGetOneTask',this.id).then((res) => {
-  //     this.newEdit = res.data
-  //     console.log(this.newEdit)
-  //   })
-  // },
   mounted() {
     this.getOneTask()
   },

@@ -2,7 +2,8 @@ import axios from "axios";
 
 const baseURL = process.env.NUXT_ENV_API_URL
 export default{
-    async apiGetAllTask({dispatch,commit}){
+    //funciton for fetching all task from backend
+    async apiGetAllTask({commit}){
         return await new Promise((resolve,reject)=>{
             axios
             .get(`${baseURL}/todos`)
@@ -19,6 +20,7 @@ export default{
             .catch()
         })
     },
+    //function for create new task
     async apiCreateTask({dispatch,commit},payload){
         return await new Promise((resolve,reject)=>{
             axios
@@ -33,6 +35,7 @@ export default{
             })
         })
     },
+    //function for deleting task
     apiDeleteTask({dispatch},payload){
         return new Promise((resolve,reject)=>{
             axios
@@ -40,11 +43,9 @@ export default{
             .then(
                 dispatch('apiGetAllTask')
             )
-            // .then(
-            //     commit('delete_task',payload.id)
-            // )
         })
     },
+    //function for get one task
     async apiGetOneTask({commit},payload){
         return await new Promise((resolve,reject)=>{
             axios.get(`${baseURL}/todos/${payload}`)
@@ -55,7 +56,8 @@ export default{
             })
         })
     },
-     apiUpdateTask({commit},payload){
+    //function for update
+    apiUpdateTask({commit},payload){
         return new Promise((resolve,reject)=>{
             axios
             .put(`${baseURL}/todos/${payload.id}`,{content : payload.content})
