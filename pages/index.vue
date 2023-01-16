@@ -43,10 +43,6 @@ export default {
     }
   },
   methods: {
-    // addTask() {
-    //   if (!this.$refs.form.validate()) return
-    //   this.$store.commit('task/setTask', this.task)
-    // },
     getAllTask() {
      this.$store.dispatch('task/apiGetAllTask')
     },
@@ -54,8 +50,10 @@ export default {
       const validate = this.$refs.form.validate()
       if(!validate) return;
       this.$store.dispatch('task/apiCreateTask', this.task)
-      this.$refs.form.reset()
-      this.getAllTask()
+      .then(
+        this.getAllTask(),
+        this.$refs.form.reset()       
+      )          
     },
     deleteTask(id) {
       this.$store.dispatch('task/apiDeleteTask', id)
