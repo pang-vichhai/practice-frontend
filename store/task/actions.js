@@ -70,11 +70,11 @@ export default{
                 })
         })
     },
-    apiMakeDone({commit},payload){
-        return new Promise((resolve,reject)=>{
+    async apiMakeDone({commit},payload){
+        return await new Promise((resolve,reject)=>{
             axios
-            .put(`${baseURL}/todos/${payload.id}`,{done:payload.done})
-            .then((res)=>{resolve(res)})
+            .put(`${baseURL}/todos/${payload.id}`,{done : !payload.done})
+            .then((res)=>{resolve(res), dispatch('apiGetAllTask')})
             .catch((err)=>{reject(err)})
         })
     }

@@ -44,7 +44,10 @@
     </v-list> -->
     <v-row class="ma-0 pa-0 my-3">
       <v-col cols="12" md="6">
-        <div :class="done ? 'text-decoration-line-through' : ''">
+        <div
+          class="text-body-1"
+          :class="task.done === false ? '' : 'text-decoration-line-through'"
+        >
           {{ task.content }}
         </div>
       </v-col>
@@ -53,9 +56,10 @@
           <v-btn
             @click="toBeDone"
             dark
-            :color="done ? 'red' : 'green'"
+            :color="update.done ? 'red' : 'green'"
             class="mx-1"
-            ><span>{{done?'Undone':'Done'}}</span><v-icon right>mdi-check-all</v-icon></v-btn
+            ><span>{{ update.done ? 'Undone' : 'Done' }}</span
+            ><v-icon right>mdi-check-all</v-icon></v-btn
           >
           <v-btn @click="goToEdit(task.id)" dark color="blue" class="mx-1"
             ><span>Edit</span
@@ -75,24 +79,34 @@
 export default {
   props: ['task', 'id'],
   methods: {
-    toBeDone() {
-      this.done = !this.done
-    },
-    // async toBeDone(){
-    //   await this.$store.dispatch('task/apiMakeDone',{done: false})
+    // toBeDone() {
+    //   this.done = !this.done
     // },
+    async toBeDone() {
+      await this.$store
+        .dispatch('task/apiMakeDone', this.update)
+        .then(this.$store.dispatch('task/apiGetAllTask'))
+    },
     deleteTask() {
       this.$emit('deleteTask', this.task.id)
     },
     goToEdit(id) {
       this.$router.push(`task/${id}`)
     },
+    // getOneTask() {
+    //   this.$store.dispatch('task/apiGetOneTask', this.task.id).then((res) => {
+    //     ;(this.update = res.data), console.log(this.update)
+    //   })
+    // },
   },
   data() {
     return {
-      done: null,
+      update: this.task,
     }
   },
+  mounted(){
+    
+  }
 }
 </script>
 
