@@ -44,16 +44,14 @@ export default {
   },
   methods: {
     getAllTask() {
-     this.$store.dispatch('task/apiGetAllTask')
+      this.$store.dispatch('task/apiGetAllTask')
     },
     addTask() {
       const validate = this.$refs.form.validate()
-      if(!validate) return;
-      this.$store.dispatch('task/apiCreateTask', this.task)
-      .then(
-        this.getAllTask(),
-        this.$refs.form.reset()       
-      )          
+      if (!validate) return
+      this.$store
+        .dispatch('task/apiCreateTask', this.task)
+        .then(this.getAllTask(), this.$refs.form.reset())
     },
     deleteTask(id) {
       this.$store.dispatch('task/apiDeleteTask', id)

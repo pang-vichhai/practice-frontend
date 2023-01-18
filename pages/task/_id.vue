@@ -7,9 +7,7 @@
           <v-btn color="red" elevation="0" @click="cancel" dark class="mx-2"
             >Cancel</v-btn
           >
-          <v-btn color="primary" elevation="0" type="submit"
-            >Update</v-btn
-          >
+          <v-btn color="primary" elevation="0" type="submit">Update</v-btn>
         </div>
       </v-form>
     </v-container>
@@ -43,11 +41,12 @@ export default {
         .dispatch('task/apiUpdateTask', this.newEdit)
         .then(
           this.$store.dispatch('task/apiGetAllTask'),
-          this.$router.push('/'))
+          this.$router.push('/')
+        )
     },
     getOneTask() {
       this.$store.dispatch('task/apiGetOneTask', this.id).then((res) => {
-         this.newEdit = res.data      
+        this.newEdit = res.data
       })
     },
   },

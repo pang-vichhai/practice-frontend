@@ -53,15 +53,20 @@
       </v-col>
       <v-col cols="12" md="6">
         <div class="d-flex justify-space-between">
-          <v-btn @click="toBeDone" dark :color="update.done ? 'red' : 'green'"
+          <v-btn
+            class="mx-auto"
+            @click="toBeDone"
+            dark
+            :color="update.done ? 'red' : 'green'"
             ><span>{{ update.done ? 'Undone' : 'Done' }}</span
             ><v-icon right>mdi-check-all</v-icon></v-btn
           >
-          <v-btn @click="goToEdit(task.id)" dark color="blue"
+          <v-btn class="mx-auto" @click="goToEdit(task.id)" dark color="blue"
             ><span>Edit</span
             ><v-icon right>mdi-text-box-edit-outline</v-icon></v-btn
           >
           <v-btn
+            class="mx-auto"
             @click="deleteTask"
             color="error"
             :disabled="update.done ? false : true"

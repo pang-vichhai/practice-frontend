@@ -1,15 +1,9 @@
 <template>
-  <v-app>
-    About Us!
-  </v-app>
+  <v-app> About Us! </v-app>
 </template>
 
 <script>
-export default {
-
-}
+export default {}
 </script>
 
-<style>
-
-</style>
+<style></style>
