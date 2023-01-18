@@ -1,9 +1,9 @@
 <template>
-  <div>
+  <v-card flat width="700" class="mx-auto">
     <v-container v-if="newEdit">
       <v-form @submit.prevent="updateTask">
         <v-text-field v-model="newEdit.content" outlined></v-text-field>
-        <div class="d-flex justify-end">
+        <div class="d-flex justify-center">
           <v-btn color="red" elevation="0" @click="cancel" dark class="mx-2"
             >Cancel</v-btn
           >
@@ -14,7 +14,7 @@
     <div v-else class="d-flex justify-center">
       <v-btn to="/">Back Home</v-btn>
     </div>
-  </div>
+  </v-card>
 </template>
 
 <script>

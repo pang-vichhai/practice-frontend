@@ -106,8 +106,7 @@ export default {
         .dispatch('task/apiGetOneTask', this.task.id)
         .then((res) => {
           const obj = res.data
-          this.$store.commit('task/set_one_task',obj)
-
+          this.$store.commit('task/set_one_task', obj)
         })
     },
   },
@@ -121,13 +120,13 @@ export default {
     // update(){
     //   return this.done = Object.assign({},this.task)
     // }
-    ...mapGetters('task', {oneTask:'task'})
+    ...mapGetters('task', { oneTask: 'task' }),
   },
   mounted() {
-    if(!this.update){
+    if (!this.update) {
       return this.getOneTask()
     }
-    this.update = Object.assign({},this.task)
+    this.update = Object.assign({}, this.task)
   },
 }
 </script>
