@@ -52,20 +52,19 @@
         </div>
       </v-col>
       <v-col cols="12" md="6">
-        <div class="d-flex justify-end">
-          <v-btn
-            @click="toBeDone"
-            dark
-            :color="update.done ? 'red' : 'green'"
-            class="mx-1"
+        <div class="d-flex justify-space-between">
+          <v-btn @click="toBeDone" dark :color="update.done ? 'red' : 'green'"
             ><span>{{ update.done ? 'Undone' : 'Done' }}</span
             ><v-icon right>mdi-check-all</v-icon></v-btn
           >
-          <v-btn @click="goToEdit(task.id)" dark color="blue" class="mx-1"
+          <v-btn @click="goToEdit(task.id)" dark color="blue"
             ><span>Edit</span
             ><v-icon right>mdi-text-box-edit-outline</v-icon></v-btn
           >
-          <v-btn @click="deleteTask" dark color="red" class="mx-1"
+          <v-btn
+            @click="deleteTask"
+            color="error"
+            :disabled="update.done ? false : true"
             ><span>Delete</span><v-icon right>mdi-delete</v-icon></v-btn
           >
         </div>
@@ -76,10 +75,10 @@
 </template>
 
 <script>
-import {mapGetters} from 'vuex'
+import { mapGetters } from 'vuex'
 export default {
   props: ['task', 'id'],
-  computed:{
+  computed: {
     // ...mapGetters('task',['oneTask'])
   },
   methods: {
