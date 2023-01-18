@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-list>
+    <!-- <v-list>
       <v-list-item>
         <v-list-item-content>
           <v-list-item-content
@@ -41,7 +41,33 @@
         </v-list-item-action>
       </v-list-item>
       <v-divider></v-divider>
-    </v-list>
+    </v-list> -->
+    <v-row class="ma-0 pa-0 my-3">
+      <v-col cols="12" md="6">
+        <div :class="done ? 'text-decoration-line-through' : ''">
+          {{ task.content }}
+        </div>
+      </v-col>
+      <v-col cols="12" md="6">
+        <div class="d-flex justify-end">
+          <v-btn
+            @click="toBeDone"
+            dark
+            :color="done ? 'red' : 'green'"
+            class="mx-1"
+            ><span>{{done?'Undone':'Done'}}</span><v-icon right>mdi-check-all</v-icon></v-btn
+          >
+          <v-btn @click="goToEdit(task.id)" dark color="blue" class="mx-1"
+            ><span>Edit</span
+            ><v-icon right>mdi-text-box-edit-outline</v-icon></v-btn
+          >
+          <v-btn @click="deleteTask" dark color="red" class="mx-1"
+            ><span>Delete</span><v-icon right>mdi-delete</v-icon></v-btn
+          >
+        </div>
+      </v-col>
+    </v-row>
+    <v-divider></v-divider>
   </div>
 </template>
 

@@ -36,8 +36,8 @@ export default{
         })
     },
     //function for deleting task
-    apiDeleteTask({dispatch},payload){
-        return new Promise((resolve,reject)=>{
+    async apiDeleteTask({dispatch},payload){
+        return await new Promise((resolve,reject)=>{
             axios
             .delete(`${baseURL}/todos/${payload}`)
             .then(
@@ -68,6 +68,14 @@ export default{
             .catch(
                 (err)=>{reject(err)
                 })
+        })
+    },
+    apiMakeDone({commit},payload){
+        return new Promise((resolve,reject)=>{
+            axios
+            .put(`${baseURL}/todos/${payload.id}`,{done:payload.done})
+            .then((res)=>{resolve(res)})
+            .catch((err)=>{reject(err)})
         })
     }
 }

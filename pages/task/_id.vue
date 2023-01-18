@@ -41,7 +41,9 @@ export default {
     async updateTask() {
       await this.$store
         .dispatch('task/apiUpdateTask', this.newEdit)
-        .then(this.$router.push('/'))
+        .then(
+          this.$store.dispatch('task/apiGetAllTask'),
+          this.$router.push('/'))
     },
     getOneTask() {
       this.$store.dispatch('task/apiGetOneTask', this.id).then((res) => {
