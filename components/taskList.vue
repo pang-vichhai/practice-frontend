@@ -65,11 +65,7 @@
             ><span>Edit</span
             ><v-icon right>mdi-text-box-edit-outline</v-icon></v-btn
           >
-          <v-btn
-            class="mx-auto"
-            @click="deleteTask"
-            color="error"
-            :disabled="update.done ? false : true"
+          <v-btn class="mx-auto" @click="deleteTask" color="error"
             ><span>Delete</span><v-icon right>mdi-delete</v-icon></v-btn
           >
         </div>
@@ -82,7 +78,7 @@
 <script>
 import { mapGetters } from 'vuex'
 export default {
-  props: ['task', 'id'],
+  props: ['task'],
   computed: {
     // ...mapGetters('task',['oneTask'])
   },
@@ -96,8 +92,11 @@ export default {
         .dispatch('task/apiMakeDone', this.update)
         .then(this.$store.dispatch('task/apiGetAllTask'))
     },
-    deleteTask() {
-      this.$emit('deleteTask', this.task.id)
+    async deleteTask() {
+      // this.$emit('deleteTask', this.task.id)
+       await this.$store
+        .dispatch('task/apiDeleteTask', this.task.id)
+        .then(this.$store.dispatch('task/apiGetAllTask'))
     },
     goToEdit(id) {
       this.$router.push(`task/${id}`)
@@ -110,7 +109,7 @@ export default {
   },
   data() {
     return {
-      update: JSON.parse(JSON.stringify(this.task)),
+      update: Object.assign({}, this.task),
     }
   },
   // mounted(){

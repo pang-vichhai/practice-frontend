@@ -21,7 +21,7 @@ export default{
         })
     },
     //function for create new task
-    async apiCreateTask({dispatch,commit},payload){
+    async apiCreateTask({commit},payload){
         return await new Promise((resolve,reject)=>{
             axios
             .post(`${baseURL}/todos`,
@@ -59,8 +59,8 @@ export default{
         })
     },
     //function for update
-    apiUpdateTask({commit},payload){
-        return new Promise((resolve,reject)=>{
+    async apiUpdateTask({commit},payload){
+        return await new Promise((resolve,reject)=>{
             axios
             .put(`${baseURL}/todos/${payload.id}`,{content : payload.content})
             .then(

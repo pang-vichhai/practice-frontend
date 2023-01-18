@@ -17,13 +17,7 @@
         </div>
       </v-form>
 
-      <task-list
-        :task="task"
-        v-for="(task, i) in tasks"
-        :id="i"
-        :key="i"
-        @deleteTask="deleteTask"
-      ></task-list>
+      <task-list :task="task" v-for="(task, i) in tasks" :key="i"></task-list>
     </v-card>
   </div>
 </template>
@@ -46,16 +40,15 @@ export default {
     getAllTask() {
       this.$store.dispatch('task/apiGetAllTask')
     },
-    addTask() {
+    async addTask() {
       const validate = this.$refs.form.validate()
       if (!validate) return
-      this.$store
-        .dispatch('task/apiCreateTask', this.task)
-        .then(this.getAllTask(), this.$refs.form.reset())
+      await this.$store.dispatch('task/apiCreateTask', this.task)
+      this.$refs.form.reset()
+      this.getAllTask()
     },
     deleteTask(id) {
-      this.$store.dispatch('task/apiDeleteTask', id)
-      this.$refs.form.reset()
+      this.$store.dispatch('task/apiDeleteTask', id)     
       this.getAllTask()
     },
   },
