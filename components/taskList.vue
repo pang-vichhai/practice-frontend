@@ -46,7 +46,7 @@
       <v-col cols="12" md="6">
         <div
           class="text-body-1"
-          :class="task.done === false ? '' : 'text-decoration-line-through'"
+          :class="update.done === false ? '' : 'text-decoration-line-through'"
         >
           {{ task.content }}
         </div>
@@ -76,13 +76,18 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
 export default {
   props: ['task', 'id'],
+  computed:{
+    // ...mapGetters('task',['oneTask'])
+  },
   methods: {
     // toBeDone() {
     //   this.done = !this.done
     // },
     async toBeDone() {
+      this.update.done = !this.update.done
       await this.$store
         .dispatch('task/apiMakeDone', this.update)
         .then(this.$store.dispatch('task/apiGetAllTask'))
@@ -95,18 +100,18 @@ export default {
     },
     // getOneTask() {
     //   this.$store.dispatch('task/apiGetOneTask', this.task.id).then((res) => {
-    //     ;(this.update = res.data), console.log(this.update)
+    //     this.update = res.data
     //   })
     // },
   },
   data() {
     return {
-      update: this.task,
+      update: JSON.parse(JSON.stringify(this.task)),
     }
   },
-  mounted(){
-    
-  }
+  // mounted(){
+  //   this.getOneTask()
+  // }
 }
 </script>
 

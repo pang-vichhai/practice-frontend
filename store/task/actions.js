@@ -51,6 +51,8 @@ export default{
             axios.get(`${baseURL}/todos/${payload}`)
             .then(
                 (res)=>{
+                    // const obj = res.data
+                    // commit('set_one_task',obj)
                     resolve(res)
                     
             })
@@ -73,7 +75,7 @@ export default{
     async apiMakeDone({commit},payload){
         return await new Promise((resolve,reject)=>{
             axios
-            .put(`${baseURL}/todos/${payload.id}`,{done : !payload.done})
+            .put(`${baseURL}/todos/${payload.id}`,{done : payload.done})
             .then((res)=>{resolve(res), dispatch('apiGetAllTask')})
             .catch((err)=>{reject(err)})
         })
