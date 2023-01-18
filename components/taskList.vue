@@ -78,8 +78,8 @@ export default {
     toBeDone() {
       this.done = !this.done
     },
-    // deleteTask(id){
-    //     this.$store.dispatch('task/apiDeleteTask',id)
+    // async toBeDone(){
+    //   await this.$store.dispatch('task/apiMakeDone',{done: false})
     // },
     deleteTask() {
       this.$emit('deleteTask', this.task.id)
@@ -90,7 +90,7 @@ export default {
   },
   data() {
     return {
-      done: false,
+      done: null,
     }
   },
 }
