@@ -76,7 +76,7 @@ export default{
         return await new Promise((resolve,reject)=>{
             axios
             .put(`${baseURL}/todos/${payload.id}`,{done : payload.done})
-            .then((res)=>{resolve(res), dispatch('apiGetAllTask')})
+            .then((res)=>{resolve(res)})
             .catch((err)=>{reject(err)})
         })
     }

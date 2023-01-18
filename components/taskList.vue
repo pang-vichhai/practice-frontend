@@ -79,9 +79,6 @@
 import { mapGetters } from 'vuex'
 export default {
   props: ['task'],
-  computed: {
-    // ...mapGetters('task',['oneTask'])
-  },
   methods: {
     // toBeDone() {
     //   this.done = !this.done
@@ -94,27 +91,44 @@ export default {
     },
     async deleteTask() {
       // this.$emit('deleteTask', this.task.id)
-       await this.$store
+      await this.$store
         .dispatch('task/apiDeleteTask', this.task.id)
-        .then(this.$store.dispatch('task/apiGetAllTask'))
+        .then(
+          this.$store.dispatch('task/apiGetAllTask'),
+          (this.update.done = false)
+        )
     },
     goToEdit(id) {
       this.$router.push(`task/${id}`)
     },
-    // getOneTask() {
-    //   this.$store.dispatch('task/apiGetOneTask', this.task.id).then((res) => {
-    //     this.update = res.data
-    //   })
-    // },
+    async getOneTask() {
+      await this.$store
+        .dispatch('task/apiGetOneTask', this.task.id)
+        .then((res) => {
+          const obj = res.data
+          this.$store.commit('task/set_one_task',obj)
+
+        })
+    },
   },
   data() {
     return {
       update: Object.assign({}, this.task),
+      done: null,
     }
   },
-  // mounted(){
-  //   this.getOneTask()
-  // }
+  computed: {
+    // update(){
+    //   return this.done = Object.assign({},this.task)
+    // }
+    ...mapGetters('task', {oneTask:'task'})
+  },
+  mounted() {
+    if(!this.update){
+      return this.getOneTask()
+    }
+    this.update = Object.assign({},this.task)
+  },
 }
 </script>
 
